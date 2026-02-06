@@ -4,6 +4,7 @@
   <link rel="shortcut icon" href="form.png" type="image/x-icon">
   <meta charset="UTF-8" />
   <title>Cadastro Divertido</title>
+
   <style>
     * {
       margin: 0;
@@ -108,41 +109,40 @@
       margin-bottom: 10px;
     }
 
-.card-alerta {
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  display: none;
-  animation: aparecer 0.6s ease;
-  
-}
-.card-alerta p {
-    text-align: center;
-  color: #fff;
-}
+    .card-alerta {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: none;
+      animation: aparecer 0.6s ease;
+    }
 
-.card-alerta .icone {
-  font-size: 32px;
-  text-align: center;
-  margin-bottom: 10px;
-  color: #fff;
-}
+    .card-alerta p {
+      text-align: center;
+      color: #fff;
+    }
 
-@keyframes aparecer {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
+    .card-alerta .icone {
+      font-size: 32px;
+      text-align: center;
+      margin-bottom: 10px;
+      color: #fff;
+    }
 
-
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
   </style>
 </head>
+
 <body>
 
   <div class="container">
@@ -174,60 +174,67 @@
 
     <div class="resultado" id="resultado">
       <div class="emoji">✨🎉</div>
-      <p><strong>Que legal te ter por aqui </strong> <span id="rNome"></span></p>
+
+      <p><strong>Que legal te ter por aqui</strong> <span id="rNome"></span></p>
       <p><strong>Email:</strong> <span id="rEmail"></span></p>
       <p><strong>Idade:</strong> <span id="rIdade"></span></p>
-      <p><strong>Área:</strong> <span id="rArea"> </span>   (Uma ótima área para estudar hein?!) </p>
+      <p><strong>Área:</strong> <span id="rArea"></span> (Uma ótima área para estudar hein?!)</p>
       <p><strong>Nível:</strong> <span id="rNivel"></span></p>
-      <p id="mensagemIdade"></p>
-<div class="card-alerta" id="cardAlerta">
-  <div class="icone">⚠️</div>
-  <p id="textoAlerta"></p>
-</div>
 
+      <div class="card-alerta" id="cardAlerta">
+        <div class="icone">⚠️</div>
+        <p id="textoAlerta"></p>
+      </div>
     </div>
   </div>
 
-  
   <script>
-  const form = document.getElementById("formCadastro");
-  const resultado = document.getElementById("resultado");
-  const mensagemIdade = document.getElementById("mensagemIdade");
+    const form = document.getElementById("formCadastro");
+    const resultado = document.getElementById("resultado");
 
-  form.addEventListener("submit", function(event) {
-    event.preventDefault();
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
 
-    const nome = document.getElementById("nome").value;
-    const email = document.getElementById("email").value;
-    const idade = Number(document.getElementById("idade").value);
-    const area = document.getElementById("area").value;
-    const nivel = document.getElementById("nivel").value;
+      const nome = document.getElementById("nome").value;
+      const email = document.getElementById("email").value;
+      const idade = Number(document.getElementById("idade").value);
+      const area = document.getElementById("area").value;
+      const nivel = document.getElementById("nivel").value;
 
-    document.getElementById("rNome").textContent = nome;
-    document.getElementById("rEmail").textContent = email;
-    document.getElementById("rIdade").textContent = idade || "Não informado";
-    document.getElementById("rArea").textContent = area || "Não informado";
-    document.getElementById("rNivel").textContent = nivel || "Não informado";
+      document.getElementById("rNome").textContent = nome;
+      document.getElementById("rEmail").textContent = email;
+      document.getElementById("rIdade").textContent = idade || "Não informado";
+      document.getElementById("rArea").textContent = area || "Não informado";
+      document.getElementById("rNivel").textContent = nivel || "Não informado";
 
-    const cardAlerta = document.getElementById("cardAlerta");
-const textoAlerta = document.getElementById("textoAlerta");
+      const cardAlerta = document.getElementById("cardAlerta");
+      const textoAlerta = document.getElementById("textoAlerta");
+      const iconeAlerta = cardAlerta.querySelector(".icone");
 
-if (idade && idade < 18) {
-  textoAlerta.textContent =
-    `Aproveita sua juventude e investe bastante em ${area} 🌱`;
+      if (idade && idade < 18) {
+        iconeAlerta.textContent = "🌱";
+        textoAlerta.textContent =
+          `Aproveita sua juventude e investe bastante em ${area || "seus estudos"}! Cada passo agora conta muito 💜`;
 
-  cardAlerta.style.display = "block";
-} else {
-  cardAlerta.style.display = "none";
-}
+        cardAlerta.style.display = "block";
 
+      } else if (idade >= 18) {
+        iconeAlerta.textContent = "🚀";
+        textoAlerta.textContent =
+          `Nunca é tarde pra crescer em ${area || "uma nova área"} ✨ Consistência e curiosidade levam longe!`;
 
-    resultado.style.display = "block";
-    resultado.scrollIntoView({ behavior: "smooth" });
+        cardAlerta.style.display = "block";
 
-    form.reset();
-  });
-</script>
+      } else {
+        cardAlerta.style.display = "none";
+      }
+
+      resultado.style.display = "block";
+      resultado.scrollIntoView({ behavior: "smooth" });
+
+      form.reset();
+    });
+  </script>
 
 </body>
 </html>
