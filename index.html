@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cadastro Divertido</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: #fff;
+      width: 100%;
+      max-width: 420px;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #5a2ea6;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 500;
+      color: #444;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border-radius: 10px;
+      border: 2px solid #ddd;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus, select:focus {
+      border-color: #764ba2;
+      box-shadow: 0 0 0 2px rgba(118,75,162,0.2);
+    }
+
+    button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .resultado {
+      margin-top: 20px;
+      background: #f5f3ff;
+      padding: 15px;
+      border-radius: 12px;
+      display: none;
+    }
+
+    .resultado p {
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .emoji {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+.card-alerta {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  display: none;
+  animation: aparecer 0.6s ease;
+  
+}
+.card-alerta p {
+    text-align: center;
+  color: #fff;
+}
+
+.card-alerta .icone {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Cadastro de Estudo 📚</h1>
+
+    <form id="formCadastro">
+      <label>Nome</label>
+      <input type="text" id="nome" placeholder="Seu nome" required>
+
+      <label>Email</label>
+      <input type="email" id="email" placeholder="seu@email.com" required>
+
+      <label>Idade</label>
+      <input type="number" id="idade" min="1" placeholder="Sua idade">
+
+      <label>Área de Estudo</label>
+      <input type="text" id="area" placeholder="Ex: Front-end, Dados...">
+
+      <label>Nível</label>
+      <select id="nivel">
+        <option value="">Selecione</option>
+        <option>Iniciante</option>
+        <option>Intermediário</option>
+        <option>Avançado</option>
+      </select>
+
+      <button type="submit">Cadastrar 🚀</button>
+    </form>
+
+    <div class="resultado" id="resultado">
+      <div class="emoji">✨🎉</div>
+      <p><strong>Que legal te ter por aqui </strong> <span id="rNome"></span></p>
+      <p><strong>Email:</strong> <span id="rEmail"></span></p>
+      <p><strong>Idade:</strong> <span id="rIdade"></span></p>
+      <p><strong>Área:</strong> <span id="rArea"> </span>   (Uma ótima área para estudar hein?!) </p>
+      <p><strong>Nível:</strong> <span id="rNivel"></span></p>
+      <p id="mensagemIdade"></p>
+<div class="card-alerta" id="cardAlerta">
+  <div class="icone">⚠️</div>
+  <p id="textoAlerta"></p>
+</div>
+
+    </div>
+  </div>
+
+  
+  <script>
+  const form = document.getElementById("formCadastro");
+  const resultado = document.getElementById("resultado");
+  const mensagemIdade = document.getElementById("mensagemIdade");
+
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const nome = document.getElementById("nome").value;
+    const email = document.getElementById("email").value;
+    const idade = Number(document.getElementById("idade").value);
+    const area = document.getElementById("area").value;
+    const nivel = document.getElementById("nivel").value;
+
+    document.getElementById("rNome").textContent = nome;
+    document.getElementById("rEmail").textContent = email;
+    document.getElementById("rIdade").textContent = idade || "Não informado";
+    document.getElementById("rArea").textContent = area || "Não informado";
+    document.getElementById("rNivel").textContent = nivel || "Não informado";
+
+    const cardAlerta = document.getElementById("cardAlerta");
+const textoAlerta = document.getElementById("textoAlerta");
+
+if (idade && idade < 18) {
+  textoAlerta.textContent =
+    `Aproveita sua juventude e investe bastante em ${area} 🌱`;
+
+  cardAlerta.style.display = "block";
+} else {
+  cardAlerta.style.display = "none";
+}
+
+
+    resultado.style.display = "block";
+    resultado.scrollIntoView({ behavior: "smooth" });
+
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
