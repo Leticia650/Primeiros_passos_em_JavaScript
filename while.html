@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+    <style>
+
+    :root{
+  --bg-color-1: #3f8aa1;
+  --bg-color-2: #9006cf;
+  --bg-color-3: #79d2efc1;
+  --botao1: #fce3e39a;
+  
+    }
+body{
+    background: linear-gradient(270deg, var(--bg-color-1), var(--bg-color-2));
+ 
+}
+
+
+section{
+
+    border: 1px solid #000000;
+    width: 500px;
+    height: 400px;
+    margin: auto;
+    margin-top: 5%;
+    background-color: var(--botao1);
+    border-radius: 10%;
+    box-shadow: 1px 1px 2px 2px #00000060;
+    text-align: center;
+}
+h1{
+    margin-top: 10%;
+    text-align: center;
+    font-size: 3em;
+}
+
+
+.senha{
+    font-weight: bolder;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+
+
+#senha{
+    
+    height: 25px;
+}
+
+#testar{
+    background-color: #ff34e194;
+    border: none;
+    height: 30px;
+    width: 100px;
+}
+
+#testar:hover{
+    background-color: #e208fa60;
+    color: #000;
+}
+
+footer{
+    text-align: center;
+    color: #ffffff;
+    margin-top: 5px;
+}
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testando o while</title>
+</head>
+<body>
+
+    <section>
+<h1>Descubra a senha correta!</h1>
+
+
+
+<div class="senha">Senha: <input type="password" name="senha" id="senha" placeholder="*********" value=""></div>
+
+
+<button onclick="Testar()" id="testar">Testar</button>
+
+    </section>
+
+    <footer> ©Letícia Marcolino </footer>
+<script>
+function Testar() {
+    let senhaCorreta = "2514";
+    let campoSenha = document.getElementById("senha");
+    let senha = campoSenha.value;
+
+    while (senha !== senhaCorreta) {
+        alert("Tente novamente, essa não é a senha correta!");
+        campoSenha.value = "";      // limpa o input
+        campoSenha.focus();         // (opcional) volta o cursor pro campo
+        return;
+    }
+
+    alert("Acesso permitido!");
+    campoSenha.value = "";
+}
+</script>
+
+
+
+
+    </script>
+</body>
+</html>
